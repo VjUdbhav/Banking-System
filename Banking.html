@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+</html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking Interface</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        
+        .container {
+            width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+        
+        .amount-box {
+            width: 100%;
+            height: 50px;
+            font-size: 20px;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #ccc;
+            margin-bottom: 30px;
+        }
+        
+        .button {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        button {
+            width: 200px;
+            height: 60px;
+            font-size: 28px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .deposit {
+            background-color: #28a745;
+        }
+        
+        .withdraw {
+            background-color: #dc3545;
+        }
+        
+        .error {
+            color: red;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 700px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 36px;
+            }
+            .amount-box {
+                height: 40px;
+                font-size: 18px;
+            }
+            .button {
+                flex-direction: column;
+                gap: 20px;
+            }
+            button {
+                width: 100%;
+                height: 50px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Banking Interface</h1>
+        <input type="number" class="amount-box" id="amount" placeholder="Enter amount" />
+        <div class="button">
+            <button class="deposit" onclick="handleTransaction('deposit')">Deposit</button>
+            <button class="withdraw" onclick="handleTransaction('withdraw')">Withdraw</button>
+        </div>
+        <div class="error" id="error-message"></div>
+    </div>
+
+    <script>
+        let balance = 1000;
+
+        function deposit() {
+            let amount = Number(document.getElementById("amount").value);
+            let error = document.getElementById("errorMsg");
+
+            if (amount <= 0 || isNaN(amount)) {
+                error.style.display = "block";
+                return;
+            }
+
+            balance += amount;
+            document.getElementById("balance").innerText = balance;
+            error.style.display = "none";
+            document.getElementById("amount").value = "";
+        }
+
+        function withdraw() {
+            let amount = Number(document.getElementById("amount").value);
+            let error = document.getElementById("errorMsg");
+
+            if (amount <= 0 || amount > balance || isNaN(amount)) {
+                error.style.display = "block";
+                return;
+            }
+
+            balance -= amount;
+            document.getElementById("balance").innerText = balance;
+            error.style.display = "none";
+            document.getElementById("amount").value = "";
+        }
+    </script>
+</body>
+
+</html>
